@@ -33,5 +33,35 @@ class Board:
             elif all(np.diag(self.board) == player.symbol) or all(np.diag(np.fliplr(self.board)) == player.symbol):
                 return True
     
-    def play(self, position: tuple, player: Player):
-        pass
+    def step(self, position: tuple[int, int], player: Player):
+        # Check if the game is over
+        if self.done:
+            raise ValueError("Game Over")
+        
+        # Get the coordinates
+        i, j = position
+
+        # If place on an non-empty position in the board, penalise the machine
+        # Return True to signal that the game has ended
+        if self.board[i][j] != 0:
+            return self.getState(), -10, True
+        
+        # Mark the player move on the board
+        self.board[i][j] = player.symbol
+
+        # Check if the player won, and reward them with 1 if they won 
+        # Return True to signal that the game has ended
+        if self.checkWinner(player):
+            self.done = True
+            self.winner = player
+            return self.getState(), 1, True
+    
+        # Check if the game has ended in a draw, and reward them with 0.5 if draw
+        # Return True to signal that the game has ended
+        elif not self.availablePositions():
+            self.done = True
+            return self.getState(), 0.5, True
+    
+        # Default
+        # Return False to signal that the game has not end
+        return self.getState(), 0, False

@@ -28,4 +28,4 @@ pip install -r requirements.txt
 Reinforcement Learning (Q Learning)
 Tic Tac Toe Bot
 Articles: https://towardsdatascience.com/reinforcement-learning-implement-tictactoe-189582bea542/
-          shttps://towardsdatascience.com/reinforcement-learning-made-simple-build-a-q-learning-agent-in-python/
+          https://towardsdatascience.com/reinforcement-learning-made-simple-build-a-q-learning-agent-in-python/
