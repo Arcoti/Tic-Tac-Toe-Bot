@@ -1,5 +1,4 @@
 import numpy as np
-from player import Player
 
 # Represents the Tic Tac Toe Board
 class Board:
@@ -24,7 +23,7 @@ class Board:
         return [(i, j) for i in range(3) for j in range(3) if self.board[i][j] == 0]
     
     # Check if the input player won
-    def checkWinner(self, player: Player):
+    def checkWinner(self, player):
         for i in range(3):
             # Check whether all elements in the horizontal or vertical row is equal to the player symbol
             if all(self.board[i, :] == player.symbol) or all(self.board[: , i] == player.symbol):
@@ -33,7 +32,7 @@ class Board:
             elif all(np.diag(self.board) == player.symbol) or all(np.diag(np.fliplr(self.board)) == player.symbol):
                 return True
     
-    def step(self, position: tuple[int, int], player: Player):
+    def step(self, position: tuple[int, int], player):
         # Check if the game is over
         if self.done:
             raise ValueError("Game Over")

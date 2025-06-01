@@ -1,5 +1,6 @@
 from collections import defaultdict
 import random
+import pickle
 from player import Player
 from board import Board
 
@@ -7,7 +8,7 @@ from board import Board
 class Agent(Player):
     def __init__(self, symbol: int, game: Board, alpha = 0.1, gamma = 0.9, epsilon = 0.1):
         super().__init__(symbol, game)
-        self.Q = defaultdict(float)     # Dictionary with key as (state, action) and value as q value; Returns 0.0 when key is missing
+        self.Q = self.load()     
         self.alpha = alpha              # Learning Rate (Weight given to new information)
         self.gamma = gamma              # Discount Factor (Importance of Future Reward)
         self.epsilon = epsilon          # Exploration Probability
@@ -35,3 +36,16 @@ class Agent(Player):
         # Bellman Equation
         newValue = oldValue + self.alpha * (reward + self.gamma * nextMaxQ - oldValue)
         self.Q[(state, action)] = newValue
+    
+    def save(self):
+        with open('qTable.pkl', 'wb') as file:
+            pickle.dump(self.Q, file)
+    
+    def load(self):
+        try:
+            with open('qTable.pkl', 'rb') as file:
+                print("Load Q Table from file")
+                return pickle.load(file)
+        except FileNotFoundError:
+            print("No Q Table found. Starting a new one.")
+            return defaultdict(float) # Dictionary with key as (state, action) and value as q value; Returns 0.0 when key is missing
