@@ -29,7 +29,10 @@ class Bot(Player):
         # Return the best action
         return bestAction
 
-    def minimax(self, replicaBoard: ReplicaBoard, depth: int, maximising: bool):
+    # Alpha and Beta for Alpha Beta Pruning
+    # Alpha is Best Max so Far
+    # Beta is Best Min so Far
+    def minimax(self, replicaBoard: ReplicaBoard, depth: int, maximising: bool, alpha = float('-inf'), beta = float('inf')):
         # Terminating Condition
         if replicaBoard.done is True:
             if replicaBoard.winner is self:
@@ -47,11 +50,15 @@ class Bot(Player):
 
             for action in actions:
                 replicaBoard.step(action, self)
-                score = self.minimax(replicaBoard, depth + 1, False)
+                score = self.minimax(replicaBoard, depth + 1, False, alpha, beta)
                 replicaBoard.backStep(action)
 
                 # Bot will maximise the score for itself
                 bestScore = max(score, bestScore)
+                alpha = max(bestScore, alpha)
+
+                if beta <= alpha:
+                    break # Prune
                 
             return bestScore
         # Opponent's Turn
@@ -62,11 +69,15 @@ class Bot(Player):
 
             for action in actions:
                 replicaBoard.step(action, self.imaginaryOpponent)
-                score = self.minimax(replicaBoard, depth + 1, True)
+                score = self.minimax(replicaBoard, depth + 1, True, alpha, beta)
                 replicaBoard.backStep(action)
 
                 # Opponent will minimise the score for Bot
                 bestScore = min(score, bestScore)
+                beta = min(bestScore, beta)
+
+                if beta <= alpha:
+                    break # Prune
 
             return bestScore
                 
