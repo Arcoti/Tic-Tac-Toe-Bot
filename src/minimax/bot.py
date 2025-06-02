@@ -1,18 +1,15 @@
 from ticTacToe.player import Player
-from replicaBoard import ReplicaBoard
+from minimax.replicaBoard import ReplicaBoard
 
 class Bot(Player):
     def __init__(self, symbol, game):
         super().__init__(symbol, game)
         self.imaginaryOpponent = Player(-1 if symbol == 1 else 1, game)
 
-    def chooseAction(self, board):
+    def chooseAction(self, state, actions):
         # Create a replica of the board
         # Step and backstep will not affect actual game
-        replicaBoard = ReplicaBoard(board)
-
-        # Get avaialble actions
-        actions = replicaBoard.availablePositions()
+        replicaBoard = ReplicaBoard(state)
 
         # Intialize best action and score
         bestAction = None
@@ -34,7 +31,7 @@ class Bot(Player):
 
     def minimax(self, replicaBoard: ReplicaBoard, depth: int, maximising: bool):
         # Terminating Condition
-        if replicaBoard.done:
+        if replicaBoard.done is True:
             if replicaBoard.winner is self:
                 return +1
             elif replicaBoard.winner is None:

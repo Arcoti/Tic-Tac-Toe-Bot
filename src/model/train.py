@@ -1,9 +1,9 @@
-from ticTacToe.board import Board
+from model.trainingBoard import TrainingBoard
 from model.agent import Agent
 import matplotlib.pyplot as plt
 
-def train(symbol: int, episodes=1000000):
-    env = Board()
+def train(symbol: int, episodes=100000):
+    env = TrainingBoard()
     agent = Agent(symbol, env)
     results = {"win": 0, "draw": 0, "loss": 0}
     winRate, lossRate, drawRate = [], [], []
@@ -20,7 +20,7 @@ def train(symbol: int, episodes=1000000):
             # Let agent play the game
             agent.alternateSymbol()
             action = agent.chooseAction(state, actions)
-            nextState, reward, done = agent.play(action)
+            nextState, reward, done = agent.trainingPlay(action)
 
             # Update the agent
             if done:
@@ -76,5 +76,8 @@ def displayTrainingResult(winRate, drawRate, lossRate):
     plt.show()
 
 def trainingProcess():
-    winRate, drawRate, lossRate = train(1)              # Symbol is 1 for the agent training
+    winRate, drawRate, lossRate = train(1,)              # Symbol is 1 for the agent training
     displayTrainingResult(winRate, drawRate, lossRate)
+
+if __name__ == "__main__":
+    trainingProcess()
