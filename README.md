@@ -45,8 +45,15 @@ $$
 
 The Tic Tac Toe Bot is trained in three stages, playing against itself, playing against a bot implemented using Minimax Algorithm with Alpha Beta Pruning and plyaing against a random bot. The first stage aims to diversify and train the bot against an average player while the second stage aims to train the bot against an excellent player. The last stage aims to diversify the bot data, allowing it to have more varaitions in its model. 
 
+## Discussion
+
+The performance of this Tic Tac Toe Bot performed relatively well against others with average performance against the Minimax Algorithm Bot. 
+
+(Insert Chart or Diagrams to show the performance against others)
+
 ## Acknowledgement
 
 I would like to express my thanks to the following resources:
+
 - [**Reinforcement Learning - Implement Tic Tac Toe**](https://towardsdatascience.com/reinforcement-learning-implement-tictactoe-189582bea542/) and [**Reinforcement Learning Made Simply: Build a Q Learning Agent in Python**](https://towardsdatascience.com/reinforcement-learning-made-simple-build-a-q-learning-agent-in-python/): The articles are used as inspiration and reference for this project
 - [**Implement the Minimax Algorithm for AI in python**](https://www.datacamp.com/tutorial/minimax-algorithm-for-ai-in-python): This article helped me to learn the Minimax Algorithm
