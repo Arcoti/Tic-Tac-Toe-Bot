@@ -37,10 +37,12 @@ class Agent(Player):
         newValue = oldValue + self.alpha * (reward + self.gamma * nextMaxQ - oldValue)
         self.Q[(state, action)] = newValue
     
+    # Save the model using pickle 
     def save(self):
         with open('qTable.pkl', 'wb') as file:
             pickle.dump(self.Q, file)
     
+    # Load the model if the file exist else start a brand new Q table
     def load(self):
         try:
             with open('qTable.pkl', 'rb') as file:
