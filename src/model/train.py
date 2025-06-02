@@ -74,13 +74,11 @@ def crossTraining(symbol: int, episodes = 1000):
     for episode in range(episodes):
         state = env.reset()
         done = False
-        prev = None
 
         turn = random.choice([1, -1])
         if turn == -1:
             opponentActions = env.availablePositions()
             opponentAction = opponent.chooseAction(state, opponentActions)
-            opponentAction = opponentAction if opponentAction != None else (3, 3)
             nextState, reward, done = env.trainingStep(opponentAction, opponent)
             state = nextState
         
@@ -103,8 +101,7 @@ def crossTraining(symbol: int, episodes = 1000):
                 break
             
             opponentActions = env.availablePositions()
-            opponentAction = opponent.chooseAction(state, opponentActions)
-            opponentAction = opponentAction if opponentAction != None else (3, 3)
+            opponentAction = opponent.chooseAction(nextState, opponentActions)
             nextState2, reward2, done = env.trainingStep(opponentAction, opponent)
 
             if done:
@@ -115,7 +112,7 @@ def crossTraining(symbol: int, episodes = 1000):
                 elif reward2 == 0.5:
                     results["draw"] += 1
                 else:
-                    results["loss"] += 1
+                    results["win"] += 1
                 
                 break
         
@@ -135,6 +132,11 @@ def crossTraining(symbol: int, episodes = 1000):
     agent.save()
     
     return winRate, drawRate, lossRate
+
+def show(state):
+    for i in range(0, 9, 3):
+        print(state[i], state[i + 1], state[i + 2])
+    print("-------")
 
 def displayTrainingResult(winRate, drawRate, lossRate):
     x = [i * 1000 for i in range(1, len(winRate) + 1)]

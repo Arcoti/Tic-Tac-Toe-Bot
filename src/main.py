@@ -6,7 +6,7 @@ def main():
     game = Game()
     dataDict = {"Q Learning Win": 0, "Minimax Win": 0, "Draw": 0}
 
-    for i in range(1000):
+    for i in range(10):
         dataDict = game.start(dataDict)
         game.restart()
 

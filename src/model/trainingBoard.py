@@ -8,7 +8,7 @@ class TrainingBoard(Board):
         self.done = False
         self.winner = None
     
-    def trainingStep(self, position: tuple[int, int], player):
+    def trainingStep(self, position, player):
         # Check if the game is over
         if self.done:
             raise ValueError("Game Over")

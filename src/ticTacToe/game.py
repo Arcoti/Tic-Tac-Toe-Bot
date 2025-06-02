@@ -25,11 +25,11 @@ class Game:
                 action = self.player2.chooseAction(state, actions)
                 state, done = self.player2.play(action)
             
-            # self.show(state)
+            self.show(state)
             turn *= -1
         
         if self.gameBoard.winner is self.player1:
-            print("Winner is Q Learning Agent")
+            print("Winner is Q Learning Agent") 
             dataDict["Q Learning Win"] += 1
         elif self.gameBoard.winner is self.player2:
             print("Winner is Minimax Algorithm Bot")

@@ -1,6 +1,7 @@
 from ticTacToe.player import Player
 from minimax.replicaBoard import ReplicaBoard
 
+# Minimax Algorithm Bot
 class Bot(Player):
     def __init__(self, symbol, game):
         super().__init__(symbol, game)
@@ -55,7 +56,7 @@ class Bot(Player):
 
                 # Bot will maximise the score for itself
                 bestScore = max(score, bestScore)
-                alpha = max(bestScore, alpha)
+                alpha = max(score, alpha)
 
                 if beta <= alpha:
                     break # Prune
@@ -74,7 +75,7 @@ class Bot(Player):
 
                 # Opponent will minimise the score for Bot
                 bestScore = min(score, bestScore)
-                beta = min(bestScore, beta)
+                beta = min(score, beta)
 
                 if beta <= alpha:
                     break # Prune
