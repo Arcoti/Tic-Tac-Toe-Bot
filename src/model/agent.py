@@ -1,8 +1,8 @@
 from collections import defaultdict
 import random
 import pickle
-from player import Player
-from board import Board
+from ticTacToe.player import Player
+from ticTacToe.board import Board
 
 # Q Learning Agent
 class Agent(Player):

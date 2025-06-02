@@ -1,5 +1,6 @@
-from board import Board
+from ticTacToe.board import Board
 from model.agent import Agent
+import matplotlib.pyplot as plt
 
 def train(symbol: int, episodes=1000000):
     env = Board()
@@ -60,3 +61,20 @@ def train(symbol: int, episodes=1000000):
     agent.save()
 
     return winRate, drawRate, lossRate
+
+def displayTrainingResult(winRate, drawRate, lossRate):
+    x = [i * 1000 for i in range(1, len(winRate) + 1)]
+    plt.plot(x, winRate, label="Win Rate")
+    plt.plot(x, drawRate, label="Draw Rate")
+    plt.plot(x, lossRate, label="Loss Rate")
+    plt.xlabel("Episodes")
+    plt.ylabel("Rate")
+    plt.title("Learning Curse of Q Learning Algorithm")
+    plt.legend()
+    plt.grid(True)
+    plt.tight_layout()
+    plt.show()
+
+def trainingProcess():
+    winRate, drawRate, lossRate = train(1)              # Symbol is 1 for the agent training
+    displayTrainingResult(winRate, drawRate, lossRate)
