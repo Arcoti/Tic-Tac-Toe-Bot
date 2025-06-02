@@ -51,6 +51,3 @@ class Agent(Player):
         except FileNotFoundError:
             print("No Q Table found. Starting a new one.")
             return defaultdict(float) # Dictionary with key as (state, action) and value as q value; Returns 0.0 when key is missing
-
-    def trainingPlay(self, position):
-        return self.game.trainingStep(position, self)

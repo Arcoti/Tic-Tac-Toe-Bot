@@ -1,8 +1,10 @@
+import random
 from model.trainingBoard import TrainingBoard
 from model.agent import Agent
+from minimax.bot import Bot
 import matplotlib.pyplot as plt
 
-def train(symbol: int, episodes=100000):
+def selfTraining(symbol: int, episodes=100000):
     env = TrainingBoard()
     agent = Agent(symbol, env)
     results = {"win": 0, "draw": 0, "loss": 0}
@@ -20,7 +22,7 @@ def train(symbol: int, episodes=100000):
             # Let agent play the game
             agent.alternateSymbol()
             action = agent.chooseAction(state, actions)
-            nextState, reward, done = agent.trainingPlay(action)
+            nextState, reward, done = env.trainingStep(action, agent)
 
             # Update the agent
             if done:
@@ -62,6 +64,78 @@ def train(symbol: int, episodes=100000):
 
     return winRate, drawRate, lossRate
 
+def crossTraining(symbol: int, episodes = 1000):
+    env = TrainingBoard()
+    agent = Agent(symbol, env)
+    opponent = Bot(-1 * symbol, env)
+    results = {"win": 0, "draw": 0, "loss": 0}
+    winRate, lossRate, drawRate = [], [], []
+
+    for episode in range(episodes):
+        state = env.reset()
+        done = False
+        prev = None
+
+        turn = random.choice([1, -1])
+        if turn == -1:
+            opponentActions = env.availablePositions()
+            opponentAction = opponent.chooseAction(state, opponentActions)
+            opponentAction = opponentAction if opponentAction != None else (3, 3)
+            nextState, reward, done = env.trainingStep(opponentAction, opponent)
+            state = nextState
+        
+        while not done:
+            actions = env.availablePositions()
+            action = agent.chooseAction(state, actions)
+
+            nextState, reward, done = env.trainingStep(action, agent)
+
+            if done:
+                agent.update(state, action, reward, nextState, [])
+
+                if reward == 1:
+                    results["win"] += 1
+                elif reward == 0.5:
+                    results["draw"] += 1
+                else:
+                    results["loss"] += 1
+
+                break
+            
+            opponentActions = env.availablePositions()
+            opponentAction = opponent.chooseAction(state, opponentActions)
+            opponentAction = opponentAction if opponentAction != None else (3, 3)
+            nextState2, reward2, done = env.trainingStep(opponentAction, opponent)
+
+            if done:
+                agent.update(state, action, -1 * reward2, nextState2, [])
+
+                if reward2 == 1:
+                    results["loss"] += 1
+                elif reward2 == 0.5:
+                    results["draw"] += 1
+                else:
+                    results["loss"] += 1
+                
+                break
+        
+            nextActions = env.availablePositions()
+            agent.update(state, action, reward, nextState2, nextActions)
+            state = nextState2
+        
+        if (episode + 1) % 100 == 0:
+            total = sum(results.values())
+            winRate.append(results["win"]/total)
+            drawRate.append(results["draw"]/total)
+            lossRate.append(results["loss"]/total)
+
+            print(f"Episode {episode + 1}: Wins {results["win"]}, Draws {results['draw']}, Losses {results["loss"]}")
+            results = {"win": 0, "draw": 0, "loss": 0}
+    
+    agent.save()
+    
+    return winRate, drawRate, lossRate
+
 def displayTrainingResult(winRate, drawRate, lossRate):
     x = [i * 1000 for i in range(1, len(winRate) + 1)]
     plt.plot(x, winRate, label="Win Rate")
@@ -69,14 +143,17 @@ def displayTrainingResult(winRate, drawRate, lossRate):
     plt.plot(x, lossRate, label="Loss Rate")
     plt.xlabel("Episodes")
     plt.ylabel("Rate")
-    plt.title("Learning Curse of Q Learning Algorithm")
+    plt.title("Learning Curve of Q Learning Algorithm")
     plt.legend()
     plt.grid(True)
     plt.tight_layout()
     plt.show()
 
 def trainingProcess():
-    winRate, drawRate, lossRate = train(1,)              # Symbol is 1 for the agent training
+    winRate, drawRate, lossRate = selfTraining(1)              # Symbol is 1 for the agent training
+    displayTrainingResult(winRate, drawRate, lossRate)
+
+    winRate, drawRate, lossRate = crossTraining(1)
     displayTrainingResult(winRate, drawRate, lossRate)
 
 if __name__ == "__main__":
