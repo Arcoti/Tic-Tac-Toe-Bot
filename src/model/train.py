@@ -1,5 +1,5 @@
 from board import Board
-from Q_Learning_Agent.agent import Agent
+from model.agent import Agent
 
 def train(symbol: int, episodes=1000000):
     env = Board()
