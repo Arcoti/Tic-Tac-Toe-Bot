@@ -133,11 +133,6 @@ def crossTraining(symbol: int, episodes = 1000):
     
     return winRate, drawRate, lossRate
 
-def show(state):
-    for i in range(0, 9, 3):
-        print(state[i], state[i + 1], state[i + 2])
-    print("-------")
-
 def displayTrainingResult(winRate, drawRate, lossRate):
     x = [i * 1000 for i in range(1, len(winRate) + 1)]
     plt.plot(x, winRate, label="Win Rate")
