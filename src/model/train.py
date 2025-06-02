@@ -4,6 +4,8 @@ from model.agent import Agent
 from minimax.bot import Bot
 import matplotlib.pyplot as plt
 
+from ticTacToe.player import Player
+
 def selfTraining(symbol: int, episodes=100000):
     env = TrainingBoard()
     agent = Agent(symbol, env)
@@ -64,6 +66,7 @@ def selfTraining(symbol: int, episodes=100000):
 
     return winRate, drawRate, lossRate
 
+# Training Q Learning Agent with Minimax Bot
 def crossTraining(symbol: int, episodes = 1000):
     env = TrainingBoard()
     agent = Agent(symbol, env)
@@ -75,14 +78,19 @@ def crossTraining(symbol: int, episodes = 1000):
         state = env.reset()
         done = False
 
+        # Randomly choose one person to start
         turn = random.choice([1, -1])
+
+        # If Opponent starts first
         if turn == -1:
             opponentActions = env.availablePositions()
             opponentAction = opponent.chooseAction(state, opponentActions)
             nextState, reward, done = env.trainingStep(opponentAction, opponent)
             state = nextState
         
+        # Begin game loop
         while not done:
+            # Agent plays first
             actions = env.availablePositions()
             action = agent.chooseAction(state, actions)
 
@@ -100,6 +108,7 @@ def crossTraining(symbol: int, episodes = 1000):
 
                 break
             
+            # Minimax Bot turn
             opponentActions = env.availablePositions()
             opponentAction = opponent.chooseAction(nextState, opponentActions)
             nextState2, reward2, done = env.trainingStep(opponentAction, opponent)
@@ -133,6 +142,82 @@ def crossTraining(symbol: int, episodes = 1000):
     
     return winRate, drawRate, lossRate
 
+# Training Q Learning Agent with Minimax Bot
+def randomTraining(symbol: int, episodes = 100000):
+    env = TrainingBoard()
+    agent = Agent(symbol, env)
+    opponent = Player(-1 * symbol, env)
+    results = {"win": 0, "draw": 0, "loss": 0}
+    winRate, lossRate, drawRate = [], [], []
+
+    for episode in range(episodes):
+        state = env.reset()
+        done = False
+
+        # Randomly choose one person to start
+        turn = random.choice([1, -1])
+
+        # If Opponent starts first
+        if turn == -1:
+            opponentActions = env.availablePositions()
+            opponentAction = random.choice(opponentActions)
+            nextState, reward, done = env.trainingStep(opponentAction, opponent)
+            state = nextState
+        
+        # Begin game loop
+        while not done:
+            # Agent plays first
+            actions = env.availablePositions()
+            action = agent.chooseAction(state, actions)
+
+            nextState, reward, done = env.trainingStep(action, agent)
+
+            if done:
+                agent.update(state, action, reward, nextState, [])
+
+                if reward == 1:
+                    results["win"] += 1
+                elif reward == 0.5:
+                    results["draw"] += 1
+                else:
+                    results["loss"] += 1
+
+                break
+            
+            # Minimax Bot turn
+            opponentActions = env.availablePositions()
+            opponentAction = random.choice(opponentActions)
+            nextState2, reward2, done = env.trainingStep(opponentAction, opponent)
+
+            if done:
+                agent.update(state, action, -1 * reward2, nextState2, [])
+
+                if reward2 == 1:
+                    results["loss"] += 1
+                elif reward2 == 0.5:
+                    results["draw"] += 1
+                else:
+                    results["win"] += 1
+                
+                break
+        
+            nextActions = env.availablePositions()
+            agent.update(state, action, reward, nextState2, nextActions)
+            state = nextState2
+        
+        if (episode + 1) % 1000 == 0:
+            total = sum(results.values())
+            winRate.append(results["win"]/total)
+            drawRate.append(results["draw"]/total)
+            lossRate.append(results["loss"]/total)
+
+            print(f"Episode {episode + 1}: Wins {results["win"]}, Draws {results['draw']}, Losses {results["loss"]}")
+            results = {"win": 0, "draw": 0, "loss": 0}
+    
+    agent.save()
+    
+    return winRate, drawRate, lossRate
+
 def displayTrainingResult(winRate, drawRate, lossRate):
     x = [i * 1000 for i in range(1, len(winRate) + 1)]
     plt.plot(x, winRate, label="Win Rate")
@@ -147,10 +232,14 @@ def displayTrainingResult(winRate, drawRate, lossRate):
     plt.show()
 
 def trainingProcess():
+
     winRate, drawRate, lossRate = selfTraining(1)              # Symbol is 1 for the agent training
     displayTrainingResult(winRate, drawRate, lossRate)
 
     winRate, drawRate, lossRate = crossTraining(1)
+    displayTrainingResult(winRate, drawRate, lossRate)
+
+    winRate, drawRate, lossRate = randomTraining(1)
     displayTrainingResult(winRate, drawRate, lossRate)
 
 if __name__ == "__main__":
