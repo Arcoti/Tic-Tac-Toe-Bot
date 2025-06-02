@@ -3,7 +3,7 @@ from board import Board
 from agent import Agent
 from player import Player
 
-def train(symbol: int, episodes=10000):
+def train(symbol: int, episodes=20000):
     env = Board()
     agent = Agent(symbol, env)
     opponent = Player(-1 * symbol, env)
@@ -12,8 +12,16 @@ def train(symbol: int, episodes=10000):
 
     for episode in range(episodes):
         state = env.reset()
-        prev = None
         done = False
+
+        startFirst = random.randint(0, 1)
+
+        # Opponent Start First
+        if startFirst == 0:
+            opponentActions = env.availablePositions()
+            opponentAction = random.choice(opponentActions)
+            nextStateOpp, rewardOpp, done = opponent.play(opponentAction)
+            state = nextStateOpp
 
         while not done:
             # Get all available actions
@@ -46,9 +54,9 @@ def train(symbol: int, episodes=10000):
                 agent.update(state, action, -1 * rewardOpp, nextStateOpp, [])
 
                 # Update Records
-                if reward == 1:
+                if rewardOpp == 1:
                     results["loss"] += 1
-                elif reward == 0.5:
+                elif rewardOpp == 0.5:
                     results["draw"] += 1
                 else:
                     results["win"] += 1
@@ -59,6 +67,7 @@ def train(symbol: int, episodes=10000):
             nextActions = env.availablePositions()
             agent.update(state, action, reward, nextStateOpp, nextActions)
             state = nextStateOpp
+            
 
         if (episode + 1) % 1000 == 0:
             total = sum(results.values())
