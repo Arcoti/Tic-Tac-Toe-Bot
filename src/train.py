@@ -10,6 +10,8 @@ def train(symbol: int, episodes=20000):
     results = {"win": 0, "draw": 0, "loss": 0}
     winRate, lossRate, drawRate = [], [], []
 
+    # Test
+
     for episode in range(episodes):
         state = env.reset()
         done = False
