@@ -1,7 +1,5 @@
-import random
 from board import Board
-from agent import Agent
-from player import Player
+from Q_Learning_Agent.agent import Agent
 
 def train(symbol: int, episodes=1000000):
     env = Board()

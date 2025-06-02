@@ -1,8 +1,8 @@
-from train import train
+from Q_Learning_Agent.train import train
 import matplotlib.pyplot as plt
 
 def main():
-    winRate, drawRate, lossRate = train(1)
+    winRate, drawRate, lossRate = train(1, 10000)
 
     x = [i * 1000 for i in range(1, len(winRate) + 1)]
     plt.plot(x, winRate, label="Win Rate")

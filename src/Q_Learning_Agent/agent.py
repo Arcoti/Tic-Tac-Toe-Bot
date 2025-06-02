@@ -39,13 +39,13 @@ class Agent(Player):
     
     # Save the model using pickle 
     def save(self):
-        with open('qTable.pkl', 'wb') as file:
+        with open('./Q_Learning_Agent/qTable.pkl', 'wb') as file:
             pickle.dump(self.Q, file)
     
     # Load the model if the file exist else start a brand new Q table
     def load(self):
         try:
-            with open('qTable.pkl', 'rb') as file:
+            with open('./Q_Learning_Agent/qTable.pkl', 'rb') as file:
                 print("Load Q Table from file")
                 return pickle.load(file)
         except FileNotFoundError:
