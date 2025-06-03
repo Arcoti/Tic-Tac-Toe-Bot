@@ -1,6 +1,4 @@
 # Tic-Tac-Toe-Bot
-
-## About
 This project aims to create a Tic Tac Toe Bot using Reinforcement Learning. 
 
 ## Installation and Running the Code
