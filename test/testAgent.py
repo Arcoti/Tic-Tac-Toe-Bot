@@ -1,7 +1,7 @@
 import unittest
 import numpy as np
-from src.backend.model.agent import Agent
-from src.backend.ticTacToe.board import Board
+from src.model.agent import Agent
+from src.ticTacToe.board import Board
 
 class TestAgent(unittest.TestCase):
     def setUp(self):
