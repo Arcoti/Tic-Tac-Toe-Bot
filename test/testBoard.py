@@ -1,7 +1,7 @@
 import unittest
 import numpy as np
-from src.ticTacToe.board import Board
-from src.ticTacToe.player import Player
+from src.backend.ticTacToe.board import Board
+from src.backend.ticTacToe.player import Player
 
 class TestBoard(unittest.TestCase):
     def setUp(self):
