@@ -54,7 +54,7 @@ The Tic Tac Toe Bot is created using Q Learning, with its data stored using a di
 Q(s, a) \leftarrow Q(s, a) + \alpha \left[ r + \gamma \max_{a'} Q(s', a') - Q(s, a) \right]
 ```
 
-The Tic Tac Toe Bot is trained in three stages, playing against itself, playing against a bot implemented using Minimax Algorithm with Alpha Beta Pruning and plyaing against a random bot. The first stage aims to diversify and train the bot against an average player while the second stage aims to train the bot against an excellent player. The last stage aims to diversify the bot data, allowing it to have more varaitions in its model. 
+The Tic Tac Toe Bot is trained in three stages, playing against itself, playing against a bot implemented using Minimax Algorithm with Alpha Beta Pruning and playing against a random bot. 
 
 ## Discussion
 
