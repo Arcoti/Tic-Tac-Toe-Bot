@@ -218,14 +218,14 @@ def randomTraining(symbol: int, episodes = 100000):
     
     return winRate, drawRate, lossRate
 
-def displayTrainingResult(winRate, drawRate, lossRate):
-    x = [i * 1000 for i in range(1, len(winRate) + 1)]
+def displayTrainingResult(winRate, drawRate, lossRate, unit, title):
+    x = [i * unit for i in range(1, len(winRate) + 1)]
     plt.plot(x, winRate, label="Win Rate")
     plt.plot(x, drawRate, label="Draw Rate")
     plt.plot(x, lossRate, label="Loss Rate")
     plt.xlabel("Episodes")
     plt.ylabel("Rate")
-    plt.title("Learning Curve of Q Learning Algorithm")
+    plt.title(title)
     plt.legend()
     plt.grid(True)
     plt.tight_layout()
@@ -234,10 +234,10 @@ def displayTrainingResult(winRate, drawRate, lossRate):
 def trainingProcess():
 
     winRate, drawRate, lossRate = selfTraining(1)              # Symbol is 1 for the agent training
-    displayTrainingResult(winRate, drawRate, lossRate)
+    displayTrainingResult(winRate, drawRate, lossRate, 1000, "Self Training Learning Curve")
 
     winRate, drawRate, lossRate = crossTraining(1)
-    displayTrainingResult(winRate, drawRate, lossRate)
+    displayTrainingResult(winRate, drawRate, lossRate, 100, "Cross Training Learning Curve")
 
     winRate, drawRate, lossRate = randomTraining(1)
-    displayTrainingResult(winRate, drawRate, lossRate)
+    displayTrainingResult(winRate, drawRate, lossRate, 1000, "Random Training Learning Curve")
