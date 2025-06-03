@@ -62,7 +62,9 @@ The Tic Tac Toe Bot is trained in three stages, playing against itself, playing 
 
 The performance of this Tic Tac Toe Bot performed relatively well. When runned against default test cases for 100 times, the total failure rate of the bot is about 19.34%, which indicates that it correctly layout wins and blocks 80% of the time. However, one reason for this high failure rate may be due to the lack of training for the bot to factor into account faster win, which is what one of the test case is about. 
 
-Regarding the training of the Tic Tac Toe Bot, it trains relatively well against itself, having constant improvements in the draw rates over time. Against a random bot, it also performed relatively well, having a constant improvement in its win rates. However, when playing against Minimax Bot, the agent training does not seem to improve as much, perhaps due to the low training attempts (1000 against 100000 due to the long time the Minimax Bot takes to make decisions). The Self Training, Cross Training and Random Training Learning Curves are shown respectively below: 
+Regarding the training of the Tic Tac Toe Bot, it trains relatively well against itself, having constant improvements in the draw rates over time. Against a random bot, it also performed relatively well, having a constant improvement in its win rates. However, when playing against Minimax Bot, the agent training does not seem to improve as much, perhaps due to the low training attempts (1000 against 100000 due to the long time the Minimax Bot takes to make decisions). 
+
+The Self Training, Cross Training and Random Training Learning Curves are shown respectively below: 
 
 ![Self Training Learning Curve](./static/Self_Training_Learning_Curve.png)
 ![Cross Training Learning Curve](./static/Cross_Training_Learning_Curve.png)
