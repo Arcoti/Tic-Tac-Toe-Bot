@@ -107,4 +107,22 @@ class TestAgent(unittest.TestCase):
         self.assertEqual(action, expectedMove)
     
 if __name__ == "__main__":
-    unittest.main()
+    totalTests = 0
+    totalFailures = 0
+    totalErrors = 0
+
+    for test in range(100):
+        loader = unittest.TestLoader()
+        suite = loader.loadTestsFromTestCase(TestAgent)
+
+        runner = unittest.TextTestRunner()
+        results = runner.run(suite)
+
+        totalTests += results.testsRun
+        totalFailures += len(results.failures)
+        totalErrors += len(results.errors)
+    
+    totalFailed = totalErrors + totalFailures
+    failureRate = totalFailed / totalTests if totalTests > 0 else 0
+
+    print(f"Failure Rate: {failureRate: .2%}")
