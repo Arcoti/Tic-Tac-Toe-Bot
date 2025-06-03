@@ -1,15 +1,20 @@
-from .ticTacToe.game import Game
-
-def main():
-    game = Game()
-    dataDict = {"Q Learning Win": 0, "Minimax Win": 0, "Draw": 0}
-
-    for i in range(10):
-        dataDict = game.start(dataDict)
-        game.restart()
-
-        if (i + 1) % 100 == 0:
-            print(dataDict)
+import time
+import pygame
+import sys
+from .ticTacToe.game import interactiveGame, simulationGame
 
 if __name__ == "__main__":
-    main()
+    choice = None
+    running = True
+
+    while True:
+        choice = input("Do you want to play with the agent? (y/n): ")
+        if choice.lower() == 'y' or choice.lower() == 'n':
+            break
+        else:
+            print("Invalid input choice. Please input again.")
+
+    if choice.lower() == 'y':
+        interactiveGame()
+    else:
+        simulationGame()
