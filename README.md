@@ -23,7 +23,7 @@ Install the python libraries.
 pip install -r requirements.txt
 ```
 
-Run the code
+Run the code. You can either play with the bot or view the game simulation between the bot and the Minimax Bot. 
 ```
 python -m src.main
 ```

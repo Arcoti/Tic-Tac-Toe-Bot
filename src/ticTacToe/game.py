@@ -58,14 +58,19 @@ def drawBoard(state, screen):
 
 def drawEndMessage(text, fontSize, screen):
     font = pygame.font.SysFont(None, fontSize)
-    textSurface = font.render(text, True, BLACK)
+    textSurface = font.render(text, True, BLACK) # Render text surface
 
-    rect = textSurface.get_rect(center = (WIDTH/2, HEIGHT/2))
+    # Generate text surface base on text dimensions
+    rect = textSurface.get_rect(center = (WIDTH/2, HEIGHT/2)) 
+
     screen.fill(WHITE)
+
+    # Blit the textSurface on to he screen using rect dimensions, and update it
     screen.blit(textSurface, rect)
     pygame.display.update()
 
 def restart(screen, gameBoard): 
+    # Reset the entire game
     screen.fill(WHITE)
     gameBoard.reset()
     drawLines(screen)
