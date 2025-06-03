@@ -1,5 +1,5 @@
-from ticTacToe.player import Player
-from minimax.replicaBoard import ReplicaBoard
+from ..ticTacToe.player import Player
+from .replicaBoard import ReplicaBoard
 
 # Minimax Algorithm Bot
 class Bot(Player):

@@ -27,8 +27,7 @@ pip install -r requirements.txt
 
 Run the code
 ```
-cd src
-python main.py
+python -m src.main
 ```
 
 After you are done, deactivate the python virtal environment
@@ -42,8 +41,7 @@ Follow the steps in [Installation and Running the Code](#installation-and-runnin
 
 Then, run the training code.
 ```
-cd src
-python train.py
+python -m src.train
 ```
 
 After you are done, deactivate the python virtal environment

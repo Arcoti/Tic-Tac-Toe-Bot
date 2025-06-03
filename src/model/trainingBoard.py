@@ -1,5 +1,5 @@
 import numpy as np
-from ticTacToe.board import Board
+from ..ticTacToe.board import Board
 
 # Represents the Tic Tac Toe Board
 class TrainingBoard(Board):

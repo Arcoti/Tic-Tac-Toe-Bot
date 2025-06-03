@@ -1,7 +1,7 @@
 import random
-from ticTacToe.board import Board
-from model.agent import Agent
-from minimax.bot import Bot
+from .board import Board
+from ..model.agent import Agent
+from ..minimax.bot import Bot
 
 class Game:
     def __init__(self):

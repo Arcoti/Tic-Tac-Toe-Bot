@@ -1,5 +1,5 @@
 import numpy as np
-from ticTacToe.board import Board
+from ..ticTacToe.board import Board
 
 class ReplicaBoard(Board):
     def __init__(self, state):

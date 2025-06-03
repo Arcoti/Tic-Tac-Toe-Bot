@@ -1,10 +1,10 @@
 import random
-from model.trainingBoard import TrainingBoard
-from model.agent import Agent
-from minimax.bot import Bot
 import matplotlib.pyplot as plt
 
-from ticTacToe.player import Player
+from .trainingBoard import TrainingBoard
+from .agent import Agent
+from ..minimax.bot import Bot
+from ..ticTacToe.player import Player
 
 def selfTraining(symbol: int, episodes=100000):
     env = TrainingBoard()
