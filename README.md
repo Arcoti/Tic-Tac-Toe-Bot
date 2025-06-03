@@ -71,7 +71,8 @@ The Self Training, Cross Training and Random Training Learning Curves are shown 
 
 ## Acknowledgement
 
-I would like to express my thanks to the following resources:
+I would like to express my thanks to the following articles:
 
-- [**Reinforcement Learning - Implement Tic Tac Toe**](https://towardsdatascience.com/reinforcement-learning-implement-tictactoe-189582bea542/) and [**Reinforcement Learning Made Simply: Build a Q Learning Agent in Python**](https://towardsdatascience.com/reinforcement-learning-made-simple-build-a-q-learning-agent-in-python/): The articles are used as inspiration and reference for this project
-- [**Implement the Minimax Algorithm for AI in python**](https://www.datacamp.com/tutorial/minimax-algorithm-for-ai-in-python): This article helped me to learn the Minimax Algorithm
+- [**Reinforcement Learning - Implement Tic Tac Toe**](https://towardsdatascience.com/reinforcement-learning-implement-tictactoe-189582bea542/)
+- [**Reinforcement Learning Made Simply: Build a Q Learning Agent in Python**](https://towardsdatascience.com/reinforcement-learning-made-simple-build-a-q-learning-agent-in-python/)
+- [**Implement the Minimax Algorithm for AI in python**](https://www.datacamp.com/tutorial/minimax-algorithm-for-ai-in-python)
