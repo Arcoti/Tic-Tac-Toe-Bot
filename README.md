@@ -31,7 +31,22 @@ cd src
 python main.py
 ```
 
-Deactivating the python virtal environment
+After you are done, deactivate the python virtal environment
+```
+deactivate
+```
+
+## Training the Model
+
+Follow the steps in [Installation and Running the Code](#installation-and-running-the-code), but stop before running the code. 
+
+Then, run the training code.
+```
+cd src
+python train.py
+```
+
+After you are done, deactivate the python virtal environment
 ```
 deactivate
 ```

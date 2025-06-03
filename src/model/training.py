@@ -241,6 +241,3 @@ def trainingProcess():
 
     winRate, drawRate, lossRate = randomTraining(1)
     displayTrainingResult(winRate, drawRate, lossRate)
-
-if __name__ == "__main__":
-    trainingProcess()

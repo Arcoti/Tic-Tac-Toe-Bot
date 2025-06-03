@@ -1,5 +1,4 @@
 from ticTacToe.game import Game
-from model.train import trainingProcess
 
 
 def main():
@@ -14,4 +13,4 @@ def main():
             print(dataDict)
 
 if __name__ == "__main__":
-    trainingProcess()
+    main()
