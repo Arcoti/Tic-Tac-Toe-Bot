@@ -10,7 +10,7 @@ class TestAgent(unittest.TestCase):
 
     def testHorizontalWin(self):
         # Set up board
-        board = ('0', '1', '1', '-1', '0', '0', '-1', '0', '0')
+        board = (0, 1, 1, -1, 0, 0, -1, 0, 0)
         self.board.board = np.array(board).reshape((3, 3))
 
         # Get Agent action
@@ -24,7 +24,7 @@ class TestAgent(unittest.TestCase):
     
     def testVerticalWin(self):
         # Set up board
-        board = ('1', '0', '0', '0', '-1', '0', '1', '0', '-1')
+        board = (1, 0, 0, 0, -1, 0, 1, 0, -1)
         self.board.board = np.array(board).reshape((3, 3))
 
         # Get Agent action
@@ -38,7 +38,7 @@ class TestAgent(unittest.TestCase):
 
     def testDiagonalWin(self):
         # Set up board
-        board = ('1', '-1', '0', '-1', '1', '0', '0', '0', '0')
+        board = (1, -1, 0, -1, 1, 0, 0, 0, 0)
         self.board.board = np.array(board).reshape((3, 3))
 
         # Get Agent action
@@ -52,7 +52,7 @@ class TestAgent(unittest.TestCase):
     
     def testHorizontalBlock(self):
         # Set up board
-        board = ('-1', '-1', '0', '1', '0', '0', '0', '0', '1')
+        board = (-1, -1, 0, 1, 0, 0, 0, 0, 1)
         self.board.board = np.array(board).reshape((3, 3))
 
         # Get Agent actions
@@ -66,7 +66,7 @@ class TestAgent(unittest.TestCase):
 
     def testVerticalBlock(self):
         # Set up board
-        board = ('-1', '1', '0', '-1', '0', '1', '0', '0', '0')
+        board = (-1, 1, 0, -1, 0, 1, 0, 0, 0)
         self.board.board = np.array(board).reshape((3, 3))
 
         # Get Agent actions
@@ -80,7 +80,7 @@ class TestAgent(unittest.TestCase):
     
     def testDiagonalBlock(self):
         # Set up board
-        board = ('-1', '1', '1', '0', '-1', '0', '0', '0', '0')
+        board = (-1, 1, 1, 0, -1, 0, 0, 0, 0)
         self.board.board = np.array(board).reshape((3, 3))
 
         # Get Agent actions
@@ -94,7 +94,7 @@ class TestAgent(unittest.TestCase):
     
     def testWinOverBlock(self):
         # Set up board
-        board = ('0', '-1', '1', '-1', '0', '1', '-1', '1', '0')
+        board = (0, -1, 1, -1, 0, 1, -1, 1, 0)
         self.board.board = np.array(board).reshape((3, 3))
 
         # Get Agent actions
@@ -105,3 +105,6 @@ class TestAgent(unittest.TestCase):
         # Test
         expectedMove = (2, 2)
         self.assertEqual(action, expectedMove)
+    
+if __name__ == "__main__":
+    unittest.main()

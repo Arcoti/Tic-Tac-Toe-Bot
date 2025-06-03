@@ -8,7 +8,7 @@ from ..ticTacToe.board import Board
 class Agent(Player):
     def __init__(self, symbol: int, game: Board, alpha = 0.1, gamma = 0.9, epsilon = 0.1):
         super().__init__(symbol, game)
-        self.Q = self.load()     
+        self.Q = self.load()    
         self.alpha = alpha              # Learning Rate (Weight given to new information)
         self.gamma = gamma              # Discount Factor (Importance of Future Reward)
         self.epsilon = epsilon          # Exploration Probability
