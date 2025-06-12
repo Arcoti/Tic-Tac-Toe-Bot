@@ -42,7 +42,7 @@ Then, run the training code.
 python -m src.train
 ```
 
-After you are done, deactivate the python virtal environment
+Upon completion, deactivate the python virtal environment
 ```
 deactivate
 ```
