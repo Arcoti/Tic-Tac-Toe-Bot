@@ -8,11 +8,6 @@ Set up the python virtual environment if this is your first time running the cod
 python -m venv .venv
 ```
 
-Set running script to be enabled in your system. 
-```
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-```
-
 Activate the python virtual environment
 ```
 .venv\Scripts\activate
